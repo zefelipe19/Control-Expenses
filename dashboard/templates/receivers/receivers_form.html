@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block 'title' %}New Receiver{% endblock %}
+
+{% block 'content' %}
+    
+    <div class="d-flex flex-md-column align-items-center">
+        
+        <div class="input-group mb-3 d-flex flex-md-column align-items-center">
+            <h1> New Receiver </h1>
+            <form action="{% url 'new_receiver' %}" method="post" class="border p-3 rounded">
+
+                {% csrf_token %}
+                
+                {{ form|crispy }}
+                
+                <input type="submit" class="btn btn-sucsses" style="background-color: green; color: white;" value="Save">
+                <input type="button" value="Back" class="btn btn-danger" onclick="location.href = '{% url 'home' %}'">
+            </form>
+        </div>
+    </div>
+{% endblock %}

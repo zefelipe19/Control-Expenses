@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block 'title' %}Expenses{% endblock %}
+
+{% block 'content' %}
+<!--Content-->
+    
+    {% if not expenses %}
+        <h4>Ops! looks like you don't have any expense</h4>
+        <p>Why don't you try to create one?</p>
+        <input type="button" value="New Expense" class="btn btn-primary m-1" onclick="location.href = '{% url 'new_expense' %}'">
+    {% endif %}
+
+    {% for expense in expenses %}
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">{{ expense.name}}</h5>
+                <p class="card-text">{{ expense.date }}</p>
+                <p class="card-text">R$ {{ expense.value | floatformat:2 }} </p>
+                <input type="button" value="Detail" class="btn btn-primary dropdown-toggle" style="background-color: blue;">
+            </div>
+        </div>
+    {% endfor %}
+
+    
+<!--End Content-->
+{% endblock %}

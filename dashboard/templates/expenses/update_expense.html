@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block 'title' %}Update {{ expense.expense_name }}{% endblock %}
+
+{% block 'content' %}
+    <div class="d-flex flex-md-column align-items-center">
+        
+        <div class="input-group mb-3 d-flex flex-md-column align-items-center">
+            <h1> Update "{{ expense.expense_name }}"</h1>
+            <form action="{% url 'update_expense' pk=expense.id %}" method="post" enctype="multipart/form-data" class='border p-3 rounded'>
+                
+                {% csrf_token %}
+
+                {{ form|crispy }}
+
+                <input type="submit" class="btn btn-sucsses" style="background-color: green; color: white;" onclick="location.href = '{% url 'detail_expense' pk=expense.id %}'" value="Save">
+                <input type="button" value="Cancel" class="btn btn-danger" onclick="location.href = '{% url 'detail_expense' pk=expense.id %}'">
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block 'title' %}SignUP{% endblock %}
+
+{% block 'content' %}
+    <div class="d-flex flex-md-column align-items-center">
+        
+        <div class="input-group mb-3 d-flex flex-md-column align-items-center">
+            <h1> SignUP </h1>
+            <form action="{% url 'signup' %}" method="post" class="border p-3 rounded" enctype="multipart/form-data">
+
+                {% csrf_token %}
+
+                {{ form|crispy}}
+                
+                <input type="submit" class="btn btn-primary m-1" value="Signup">
+
+                <br>
+                <span>Already hava account? Make login here.</span>
+                <input type="button" value="Login" class="btn btn-success" onclick="location.href = '{% url 'login' %}'">
+            </form>
+        </div>
+    </div>
+{% endblock %}

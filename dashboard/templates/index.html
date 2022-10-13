@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block 'title' %}Control Expenses{% endblock %}
+
+{% block 'content' %}
+    
+    <div class="container">
+        <div class="m-2">
+            <h1>Welcome to Control Expenses</h1>
+            <p>
+                This app was created to help me to remember my expenses, but i decide to put this on my portfolio, and i decide to expand my application to help other peoples.
+            </p>
+        </div>
+        <div class="m-3">
+            <h4>How this app work?</h4>
+            <p>
+                This app work with a <strong>CRUD</strong>, and what is "CRUD"?
+            </p>
+            <div>
+                <span>Don't have account? Create your account here.</span>
+                <input type="button" value="Signup" class="btn btn-primary m-1" onclick="location.href = '{% url 'signup' %}'">
+            </div>
+            <div>
+                <span>Already hava account? Make login here.</span>
+                <input type="button" value="Login" class="btn btn-success m-1" onclick="location.href = '{% url 'login' %}'">
+            </div>
+        </div>
+    </div>
+{% endblock %}
