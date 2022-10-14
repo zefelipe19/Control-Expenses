@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-i2j2_((-4&#p69i_x-!s83t5917y!e5%t7i6213zzyk8)77f8y
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['zefelipe-ce.herokuapp.com']
 
 
 # Application definition
