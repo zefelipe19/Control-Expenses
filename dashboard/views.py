@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.views.generic import View, ListView, CreateView, UpdateView, DetailView, DeleteView, TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
+from django.db.models import Case
 
 from expenses.models import *
 from expenses.forms import NewExpenseForm
@@ -29,6 +30,12 @@ class ListUserExpenses(LoginRequiredMixin, ListView):
         )
         context['expenses'] = expenses
         return context
+    
+    
+    def get_queryset(self):
+        qs = super().get_queryset()
+        qs = qs.order_by('-id')
+        return qs
 
 
 class CreateUserExpense(LoginRequiredMixin, CreateView):

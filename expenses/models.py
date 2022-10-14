@@ -23,6 +23,6 @@ class Expenses(models.Model):
             slug = f'{self.user}-{slugify(self.name)}'
             self.slug = slug
 
-        if self.payed == True:
-            self.payment_date = models.DateTimeField(default=datetime.now)
+        # if self.payed == True:
+        #     self.payment_date = models.DateTimeField(default=datetime.now)
         super().save(*args, **kwargs)
