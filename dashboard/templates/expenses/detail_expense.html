@@ -1,27 +1,23 @@
 {% extends 'base.html' %}
 
-{% block 'title' %}{{ expense.expense_name }}{% endblock%}
+{% block 'title' %}{{ expense.name }}{% endblock%}
 
 {% block 'content' %}
-    <h1>{{ expense.expense_name }}</h1>
-    <p>R$ {{ expense.expense_value }} | {{ expense.expense_date }} | to <strong>{{ expense.payment_receiver }}</strong></p>
-    <p>{{ expense.expense_note }}</p>
-
-    {% if expense.expense_image %}
-        <img src="{{ expense.expense_image.url }}" alt="{{ expense.expense_name }}" class="img-fluid img-thumbnail">
-    {% endif %}   
-
+    <h1>{{ expense.name }}</h1>
+    <p>R$ {{ expense.value }} | {{ expense.date }}</p>
+    <p>{{ expense.description }}</p>
+  
     <div class="m-auto mt-2">
         <div class="dropdown d-inline me-2">
             <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: blue;">
                 Options
             </button>
             <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="{% url 'update_expense' pk=expense.id %}">Edit</a></li>
-                <li><a class="dropdown-item" href="{% url 'delete_expense' pk=expense.id %}">Delete</a></li>
+                <li><a class="dropdown-item" href="{% url 'update' slug=expense.slug %}">Edit</a></li>
+                <li><a class="dropdown-item" href="{% url 'delete' slug=expense.slug %}">Delete</a></li>
             </ul>
         </div>
-        <input type="button" value="Back" class="btn btn-primary dropdown-toggle" style="background-color: blue;" onclick="location.href = '{% url 'see_expenses' %}'">
+        <input type="button" value="Back" class="btn btn-primary dropdown-toggle" style="background-color: blue;" onclick="location.href = '{% url 'list_expenses' %}'">
     </div>
     
 {% endblock %}

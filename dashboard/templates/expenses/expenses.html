@@ -17,7 +17,7 @@
                 <h5 class="card-title">{{ expense.name}}</h5>
                 <p class="card-text">{{ expense.date }}</p>
                 <p class="card-text">R$ {{ expense.value | floatformat:2 }} </p>
-                <input type="button" value="Detail" class="btn btn-primary dropdown-toggle" style="background-color: blue;">
+                <input type="button" value="Detail" class="btn btn-primary dropdown-toggle" onclick="location.href='{% url 'detail' expense.slug %}'">
             </div>
         </div>
     {% endfor %}
