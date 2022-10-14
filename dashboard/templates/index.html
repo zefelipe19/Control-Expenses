@@ -16,6 +16,11 @@
             <p>
                 This app work with a <strong>CRUD</strong>, and what is "CRUD"?
             </p>
+            <p>
+                CRUD is an abbreviation to Create, Read, Update and Delete, is this the 4 basic operations in a database.
+                <br> You can create your account and then create your own expenses to help you remember later, the app will provide you with a simple dashboard to show you all your expenses in a comfortable way.
+            </p>
+            {% if not request.user.is_authenticated %}
             <div>
                 <span>Don't have account? Create your account here.</span>
                 <input type="button" value="Signup" class="btn btn-primary m-1" onclick="location.href = '{% url 'signup' %}'">
@@ -24,6 +29,7 @@
                 <span>Already hava account? Make login here.</span>
                 <input type="button" value="Login" class="btn btn-success m-1" onclick="location.href = '{% url 'login' %}'">
             </div>
+            {% endif %}
         </div>
     </div>
 {% endblock %}
