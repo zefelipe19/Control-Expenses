@@ -15,7 +15,17 @@ class Index(TemplateView):
 
 class Home(LoginRequiredMixin, View):
     def get(self, request):
-        return render(request, 'dashboard.html')
+        qs = Expenses.objects.filter(user=self.request.user).values()
+
+        df = pd.DataFrame(qs)
+        df = df.drop(['id', 'user_id', 'description','slug', 'payment_date'], 1)
+        df = df.rename(columns={'name':'Name', 'value':'Value', 'date':'Date', 'payed':'Payed'})
+       
+
+        context = {
+            'df': df.to_html(),
+        }
+        return render(request, 'dashboard.html', context)
     
 
 # Expenses Area
