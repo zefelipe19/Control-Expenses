@@ -4,8 +4,12 @@
 {% block 'content' %}
 <h1>Hello {{user}}, how are you?</h1>
 
-<div class="">
-    {{df | safe}}
+<div class="row">
+    <div class="col">
+        <h5>Your total current expenses values is: R$ {{total_value}}</h5>
+        
+    </div>
+    {{df|safe}}
 </div>
 
 {% endblock %}

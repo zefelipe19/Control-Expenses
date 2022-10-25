@@ -16,14 +16,21 @@ class Index(TemplateView):
 class Home(LoginRequiredMixin, View):
     def get(self, request):
         qs = Expenses.objects.filter(user=self.request.user).values()
+        current_value = 0
+
+        for value in qs:
+            current_value += value['value']
+        
+        current_value = str(current_value).replace('.', ',')
 
         df = pd.DataFrame(qs)
         df = df.drop(['id', 'user_id', 'description','slug', 'payment_date'], 1)
         df = df.rename(columns={'name':'Name', 'value':'Value', 'date':'Date', 'payed':'Payed'})
        
-
+        
         context = {
             'df': df.to_html(),
+            'total_value': current_value
         }
         return render(request, 'dashboard.html', context)
     
@@ -52,7 +59,7 @@ class CreateUserExpense(LoginRequiredMixin, CreateView):
     template_name = 'expenses/create_expense.html'
     model = Expenses
     form_class = NewExpenseForm
-    success_url = reverse_lazy('list_expenses')
+    success_url = reverse_lazy('home')
     
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -69,9 +76,9 @@ class UserExpensesDetail(LoginRequiredMixin, DetailView):
 class UpdateUserExpense(LoginRequiredMixin, UpdateView):
     model = Expenses
     context_object_name = 'expense'
-    form_class = NewExpenseForm
     slug_url_kwarg = 'slug'
     template_name = 'expenses/update_expense.html'
+    fields = ['value', 'description', 'payed']
     success_url = reverse_lazy('detail')
 
 
